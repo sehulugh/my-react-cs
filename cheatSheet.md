@@ -49,6 +49,7 @@ npm start
 
 > How is React compiled into a bundle file? It uses what is called a "file loader". In the case of Create React App, **Webpack** is used.
 Webpack creates a "bundle" file containing the content of multiple files that need to be "bundled" together and it is all added together into a single file. Instead of making the HTML file go and find multiple files, which can slow down load times tremendously, it only has to find one file.
+create-react-app also install **Babel**, a JavaScript compliller that converts jsx to JavaScript (see [Babeljs.io](https://babeljs.io/repl))
 
 ### JSX
 - ReactDOM.render(jsx, container)
@@ -71,9 +72,9 @@ ReactDOM.render(el, document.getElementById('root'));
 ### Components
 Lets you split a page into independent and reusable parts, In react you can create **Functional** or **Class** components
 #### Functional Components
-This is a simple javaScript function save that it starts with an _**upper case**_ letter. To display the component, we need to create the corresponding jsx element
+This is a simple JavaScript function save that it starts with an _**upper case**_ letter. To display the component, we need to create the corresponding jsx element
 ```jsx
-fucntion Hello(){
+function Hello(){
     return <h1>Hello World</h1>;
 }
 
@@ -126,7 +127,7 @@ class Counter extends React.Component{
         counter : 0
         }
 
-     increment() => this.setState({counter: this.state.counter + 1});
+     increment = () => this.setState({counter: this.state.counter + 1});
     
     render(){
         return (
@@ -150,7 +151,7 @@ import React, {useState} from 'react';
 function Counter(){
     const [counter, setCounter] = useState(0);
 
-    increment() => setCounter(counter + 1);
+    increment = () => setCounter(counter + 1);
     
     return (
         <div>
@@ -164,7 +165,7 @@ function Counter(){
  for class components
 | Class Method         | Function Hook                                      | Description                                              |
 | -------------------- | -------------------------------------------------- | -------------------------------------------------------- |
-| ComponentDidMount    | `useEffect(()=>{//code})`                          | called when a component is rendered ona a page           |
+| ComponentDidMount    | `useEffect(()=>{//code})`                          | called when a component is rendered on  a page           |
 | ComponentDidUpdate   | `useEffect(()=>{//code}, [count])`                 | called when a component is updated in the DOM            |
 | ComponentWillUnMount | `useEffect(()=>{//code return ()=>{// cleanup};})` | called just before the component is removed from the DOM |
 React provides the **useEffect** Hook to make the Lifecycle methods available in functional components
@@ -188,6 +189,29 @@ function Converter() {
   </div>;
 }
 ```
+```jsx
+  // hanldling form input
+    function AddForm() {
+        const [sum, setSum] = useState(0);
+        const [num, setNum] = useState(0);
+
+        function handleChange(e) {
+            setNum(e.target.value);
+        }
+
+        function handleSubmit(e) {
+            setSum(sum + Number(num));
+            e.preventDefault();
+        }
+
+        return <form onSubmit={handleSubmit}>
+        <input type="number" value={num} onChange={handleChange} />
+        <input type="submit" value="Add" />
+        <p> Sum is {sum} </p>
+        </form>;
+    }
+  ```
+### Intro to Redux
 
 ### Adding Redux
 ```cmd
@@ -211,25 +235,4 @@ yarn add react-redux / npm install react-redux
 
   ```
   
-  ```jsx
-  // hanldling form input
-    function AddForm() {
-        const [sum, setSum] = useState(0);
-        const [num, setNum] = useState(0);
-
-        function handleChange(e) {
-            setNum(e.target.value);
-        }
-
-        function handleSubmit(e) {
-            setSum(sum + Number(num));
-            e.preventDefault();
-        }
-
-        return <form onSubmit={handleSubmit}>
-        <input type="number" value={num} onChange={handleChange} />
-        <input type="submit" value="Add" />
-        <p> Sum is {sum} </p>
-        </form>;
-    }
-  ```
+  

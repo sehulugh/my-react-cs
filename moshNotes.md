@@ -7,6 +7,7 @@ Ref: [React turorials by Mosh](https://www.youtube.com/watch?v=Ke90Tje7VS0&list=
 |------ | -------------------|
 |`imrc` | import react line |
 | `cc` | component boiler plate |
+| `sfc` | stateless function component |
 
 **VsCode** shortcuts
 | shortcut | Description |

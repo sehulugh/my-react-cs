@@ -1,14 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import Counters from "./components/counters";
+import AddPersonForm from "./components/addPersonForm";
+import "bootstrap/dist/css/bootstrap.css";
+import PeopleList from "./components/peopleList";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <div className="m-5">
+      <AddPersonForm />
+      <PeopleList />
+      <Counters />
+    </div>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

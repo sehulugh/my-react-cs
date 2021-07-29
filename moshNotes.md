@@ -23,12 +23,18 @@ import into index.js
 import 'bootstrap/dist/csss/bootstrap.css';
 ```
 ---
-Replace empty div in veirtal DOM using 
+Replace empty div in virtual DOM using fragments, see [docs](https://reactjs.org/docs/fragments.html)
 ```jsx
 <React.Fragment>
-//highlight and use ctrl + d to highlight 
-//multiple occurence of text in Vs Code
+    //highlight and use ctrl + d to highlight 
+    //multiple occurence of text in Vs Code
 </React.Fragment>
+
+//new syntax for fragments
+<>
+    //highlight and use ctrl + d to highlight 
+    //multiple occurence of text in Vs Code
+</>
 ```
 ---
 > Highlight a section of code, right click and select refreactor to generate method.
@@ -81,7 +87,7 @@ class Counter extends Component {
                 {/* Dynamically Displaying classes */}
                 <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
                 <button onClick={this.handleIncrement()} className="btn btn-default btn-sm">Increment</button>
-                </React.Fragment>
+            </React.Fragment>
         )
     }
 }

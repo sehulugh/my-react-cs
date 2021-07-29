@@ -4,15 +4,12 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Counters from "./components/counters";
-import AddPersonForm from "./components/addPersonForm";
 import "bootstrap/dist/css/bootstrap.css";
-import PeopleList from "./components/peopleList";
 
 ReactDOM.render(
   <React.StrictMode>
     <div className="m-5">
-      <AddPersonForm />
-      <PeopleList />
+      <App />
       <Counters />
     </div>
   </React.StrictMode>,

@@ -211,7 +211,78 @@ function Converter() {
         </form>;
     }
   ```
+  **The Contact App**
+  ```jsx
+    //structure
+    |- index.js
+    |- App.js
+    |- components
+    |-- contactMgr
+    |--- contactManager.jsx
+    |--- addPerson.jsx
+    |--- peopleList.jsx.jsx
+  ```
 ### Intro to Redux
+Saves us the stress of having to pass down data through components, provides a single state container and strict rules on how a state can be changed
+you cannot change the state directly but dispatch an **action** to do so
+
+
+#### Core Concepts
+**Store**
+Application state is stored in a single object called store
+
+```jsx
+{
+    contacts:[{name:"Paul Bija"}, {name: "Sesugh Hulugh"}],
+    toggle:true
+}
+```
+
+**Action**
+action is also just an object that must have a type property
+```jsx
+{
+    type: "ADD_CONTACT",
+    name: "Sam Pokies"
+}
+// or
+{
+    type: "ADD_CONTACT",
+    payload:{
+        name:"Sam Pokies"
+    }
+}
+```
+to create reusable code we can create action creator fucntions
+```jsx
+function addContact(person){
+    return{
+        type:"ADD_CONTACT",
+        payload:person
+    }
+}
+```
+**Reducer**
+To tie **store** and **action** together we need a function called the **reducer**. it takes state and action as arguments and returns the next state of the app. 
+Reducers are pure functions as they do not modify state but return a new state object
+```jsx
+function contactApp(state, action){
+    switch (action.type){
+        case 'ADD_CONTACT':
+            return [...state,action.name]
+            default:
+                return state
+    }   
+}
+```
+Redux gives us a method that we can use called **combineReducers**. This allows us to use more than one reducer so that when an action gets dispatched, the action would get run through all of the reducers instead of only one. It also allows us to separate the concerns of our store state.
+```jsx
+const contactsApp = combineReducer({
+    contactApp,
+    doSomething
+})
+```
+
 
 ### Adding Redux
 ```cmd

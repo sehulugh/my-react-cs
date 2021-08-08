@@ -1,13 +1,12 @@
 import logo from "./logo.svg";
 import "./App.css";
-import AddPersonForm from "./components/contactMgr/addPersonForm";
-import PeopleList from "./components/contactMgr/peopleList";
 import ContactManager from "./components/contactMgr/contactManager";
 
 function App() {
+  const contacts = ["Sesugh Hulugh", "Paul Bija"];
   return (
     <div>
-      <ContactManager />
+      <ContactManager data={contacts} />
     </div>
   );
 }

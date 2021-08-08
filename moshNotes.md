@@ -2,7 +2,7 @@
 Ref: [React turorials by Mosh](https://www.youtube.com/watch?v=Ke90Tje7VS0&list=PLDG0xwctDO6iF7CT1nbxwY4RNBTVIoDT8&index=5)
 
 ---
-**Simple React Snippets** shortcuts
+**Simple React Snippets** shortcuts. [full list](https://marketplace.visualstudio.com/items?itemName=burkeholland.simple-react-snippets)
 | shortcut | Output |
 |------ | -------------------|
 |`imrc` | import react line |

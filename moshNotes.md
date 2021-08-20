@@ -12,8 +12,8 @@ Ref: [React turorials by Mosh](https://www.youtube.com/watch?v=Ke90Tje7VS0&list=
 **VsCode** shortcuts
 | shortcut | Description |
 |------ | -------------------|
-|`ctrl + P` | find file |
-
+|`ctrl + p` or `ctrl + e` | find file |
+|`ctrl + d` | highlight multiple occurences of highlighted text|
 ---
 
 Install bootstrap

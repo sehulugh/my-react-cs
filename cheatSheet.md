@@ -220,7 +220,7 @@ function Converter() {
     |-- contactMgr
     |--- contactManager.jsx
     |--- addPerson.jsx
-    |--- peopleList.jsx.jsx
+    |--- peopleList.jsx
   ```
 ### Intro to Redux
 Saves us the stress of having to pass down data through components, provides a single state container and strict rules on how a state can be changed
@@ -305,5 +305,13 @@ yarn add react-redux / npm install react-redux
         , document.getElementById('root'));
 
   ```
-  
+  ### Build and Deploy
+
+  See the [docs](https://create-react-app.dev/docs/deployment/)
+
+  ```jsx
+    yarn build
+    //or 
+    npm run build
+  ```
   

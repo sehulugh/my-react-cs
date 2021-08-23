@@ -142,7 +142,7 @@ class Counter extends React.Component{
 
 ### Hooks
 Hooks was introduced to allow the use of state inside functional components, we need to import the **useState** named module from react.
-useState returns a pair, the current state value and a function that lets you change the state
+useState returns a pair ([array destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)), the current state value and a function that lets you change the state
 useState takes one argument which is the intial value of the state
 ```jsx
 //function counting app using hooks
@@ -211,7 +211,7 @@ function Converter() {
         </form>;
     }
   ```
-  **The Contact App**
+  ### The Contact App without Redux
   ```jsx
     //structure
     |- index.js
@@ -219,10 +219,116 @@ function Converter() {
     |- components
     |-- contactMgr
     |--- contactManager.jsx
-    |--- addPerson.jsx
+    |--- addPersonForm.jsx
     |--- peopleList.jsx
   ```
-### Intro to Redux
+  **Index.js**
+  This is the entry point to our react app and conatins the `reactDOM.render(jsx, rootElemet)` method and calls the App base component
+  ```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import "bootstrap/dist/css/bootstrap.css";
+
+ReactDOM.render(
+  <React.StrictMode>
+    <div className="m-5">
+      <App />
+    </div>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+  ```
+**App.jsx**
+The Base component that calls the ***ContactManager*** component, we also create the contacts array which is passed into the ***ContactManager*** component via props.
+```jsx
+import ContactManager from "./components/contactMgr/contactManager";
+
+function App() {
+  const contacts = ["Sesugh Hulugh", "Paul Bija"];
+  return (
+    <div>
+      <ContactManager data={contacts} />
+    </div>
+  );
+}
+
+export default App;
+```
+**contactManager.jsx**
+This component exists because we need to lift the state up inorder to share it between ***addPersonForm*** and ***peopleList*** components
+```jsx
+import React, { useState } from "react";
+import AddPersonForm from "./addPersonForm";
+import PeopleList from "./peopleList";
+
+const ContactManager = (props) => {
+  const [contacts, setContacts] = useState(props.data);
+
+  function addPerson(name) {
+    setContacts([...contacts, name]);
+  }
+
+  return (
+    <>
+      <AddPersonForm handleSubmit={addPerson} />
+      <PeopleList data={contacts} />
+    </>
+  );
+};
+
+export default ContactManager;
+```
+**AddPersonForm.jsx**
+Takes in the addPerson function as props, accepts a name and adds the name to the contact list using the [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
+```jsx
+import React, { useState, useEffect } from "react";
+
+const AddPersonForm = (props) => {
+  const [person, setPerson] = useState("");
+
+  function handleChange(e) {
+    setPerson(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    props.handleSubmit(person);
+    setPerson("");
+    e.preventDefault();
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Add new contact"
+        onChange={handleChange}
+        value={person}
+      />
+      <button type="submit">Add</button>
+    </form>
+  );
+};
+
+export default AddPersonForm;
+```
+**peopleList.jsx**
+passes the contacts array as props and uses the map function to build a display list
+```jsx
+import React, { useState } from "react";
+
+const PeopleList = (props) => {
+  const arr = props.data;
+  const listItems = arr.map((val, index) => <li key={index}>{val}</li>);
+
+  return <ul>{listItems}</ul>;
+};
+
+export default PeopleList;
+```
+---
+## Intro to Redux
 Saves us the stress of having to pass down data through components, provides a single state container and strict rules on how a state can be changed
 you cannot change the state directly but dispatch an **action** to do so
 
@@ -292,20 +398,34 @@ yarn add react-redux / npm install react-redux
 - under src folder create **actions** and reducers **folders**
 - under src folder add a **store.js** file
 - in the index.js file add the store and wrap the jsx render method input with the provider component
+```jsx
+import {Provider} from react-redux;
+import store from ./redux/store;
+
+ReactDOM.render(
+    <Provider store={store}>
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
+    </Provider>
+    , document.getElementById('root'));
+
+```
+### The Contact App with Redux
   ```jsx
-    import {Provider} from react-redux;
-    import store from ./redux/store;
-
-    ReactDOM.render(
-        <Provider store={store}>
-            <React.StrictMode>
-                <App />
-            </React.StrictMode>
-        </Provider>
-        , document.getElementById('root'));
-
+    //structure
+    |- index.js
+    |- App.js
+    |- components
+    |-- contactMgr
+    |--- contactManager.jsx
+    |--- addPersonForm.jsx
+    |--- peopleList.jsx
   ```
-  ### Build and Deploy
+
+
+
+### Build and Deploy
 
   See the [docs](https://create-react-app.dev/docs/deployment/)
 
